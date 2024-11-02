@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only for you ❤️</title>
+    <style>
+        body {
+            background-color: black; /* Set the body background to black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        canvas { 
+            background-color: black; 
+            display: block;
+            border: 1px solid #f73487;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="1400"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set initial properties with thinner line width
+        ctx.strokeStyle = "#f73487";
+        ctx.lineWidth = 0.5; // Set line width to 0.5 for a thinner pen
+        ctx.translate(canvas.width / 2, canvas.height / 2); 
+
+        function hearta(k) {
+            return 15 * Math.pow(Math.sin(k), 3);
+        }
+
+        function heartb(k) {
+            return (
+                12 * Math.cos(k) - 
+                5 * Math.cos(2 * k) - 
+                2 * Math.cos(3 * k) - 
+                Math.cos(4 * k)
+            );
+        }
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < 6000) {
+                const x = hearta(i) * 10;
+                const y = heartb(i) * 10;
+
+                ctx.lineTo(x, -y); 
+                ctx.stroke();
+
+                i++;
+            } else {
+                clearInterval(interval); 
+            }
+        }, 40); 
+    </script>
+</body>
+</html>
